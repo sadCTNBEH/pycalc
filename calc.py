@@ -1,22 +1,31 @@
 def main(input: str):
+    txt = input.split()
+    if len(txt) != 3:
+        raise Exception("throws Exception 0")
     try:
-        first = int(txt.split()[0])
-        second = int(txt.split()[2])
-        if txt.split()[3] != None:
-            raise Exception("throws Exception")
-        elif first < 1 or second < 1 or first > 10 or second > 10:
-            raise Exception("throws Exception")
-        else:
-            match txt.split()[1]:
-                case "+":
-                    print(first + second)
-                case "-":
-                    print(first - second)
-                case "*":
-                    print(first * second)
-                case "/":
-                    print(first // second)
-                case _:
-                    raise Exception("throws Exception")
-    except Exception as e:
-        print("throws Exception")
+        first = int(txt[0])
+        second = int(txt[2])
+        op = txt[1]
+    except ValueError:
+        raise Exception("throws Exception 1")
+    if not (1 <= first <= 10) or not (1 <= second <= 10):
+        raise Exception("throws Exception 2")
+    match op:
+        case "+":
+            result = first + second
+        case "-":
+            result = first - second
+        case "*":
+            result = first * second
+        case "/":
+            result = first // second
+        case _:
+            raise Exception("throws Exception 3")
+            
+    return str(result)
+
+if __name__ == "__main__":
+    while True:
+        checkInput = input("Проверка: ")
+        output = main(checkInput)
+        print(output)
